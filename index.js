@@ -8,13 +8,12 @@ const userModel = require("./model/user.model");
 
 const app = express();
 const PORT = process.env.PORT;
-console.log(process.env.PORT);
-const port = 8000;
+
 
 app.use(express.json());
 connection();
 
-app.listen(port, () => console.log(`Server is running on :${port}`));
+app.listen(PORT, () => console.log(`Server is running`));
 
 app.get("/register", (req, res) => {
   res.send({ message: "Get req working" });

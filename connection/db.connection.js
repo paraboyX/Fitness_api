@@ -1,12 +1,15 @@
-const mongoose = require("mongoose");
 require("dotenv").config();
+const mongoose = require("mongoose");
 const MONGO_URL = process.env.MONGO_URL;
-console.log(MONGO_URL);
 
 const connection = async () => {
   try {
-    await mongoose.connect("mongodb://localhost:27017/Nutrition", {});
-    console.log("Connected to MongoDB");
+    await mongoose
+      .connect(MONGO_URL)
+      .then(() => {
+        console.log("DB connection established");
+      })
+      .catch((err) => console.log(err));
   } catch (error) {
     console.error("MongoDB connection error:", error);
   }
