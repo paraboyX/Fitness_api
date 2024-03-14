@@ -1,24 +1,22 @@
 const userModel = require("../model/user.model");
 var bcrypt = require("bcryptjs");
 
-const createUser = (req, res) => {
+const createUser = async(req, res) => {
   let newUser = req.body;
   let pass = newUser.password;
   var salt = bcrypt.genSaltSync(10);
   var hashedPass = bcrypt.hashSync(pass, salt);
   newUser.password = hashedPass;
-  userModel
-    .create(newUser)
-    .then(() => res.status(201).send({ message: "User inserted" }))
-    .catch((err) => {
-      console.log("Error in creating User", err);
-      return res.status(400).send({
-        message: "Insertion issue",
-      });
-    });
-};
+  try{
+     let doc = await userModel.create(newUser)
+  }
+  catch(err){
+    console.log(err);
+    res.status(500).send({ message: "Error in updation" });
+  }
+}
 
-const getUsers = (req, res) => {
+const getUsers = async(req, res) => {
   userModel
     .find()
     .then((data) => {
@@ -29,7 +27,7 @@ const getUsers = (req, res) => {
     });
 };
 
-const updateUser = (req, res) => {
+const updateUser = async(req, res) => {
   let id = req.params.id;
   let updatedData = req.body;
   userModel
@@ -43,7 +41,7 @@ const updateUser = (req, res) => {
     });
 };
 
-const deleteUser = (req, res) => {
+const deleteUser = async(req, res) => {
   let id = req.params.id;
   userModel
     .deleteOne({ _id: id })
