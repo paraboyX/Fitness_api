@@ -25,12 +25,22 @@ const getUsers = (req, res) => {
       res.status(200).send(data);
     })
     .catch((error) => {
-      res.status(500).send({message : "Server error"});
+      res.status(500).send({ message: "Server error" });
     });
 };
 
 const updateUser = (req, res) => {
-  res.status(200).send({ message: "Put req working" });
+  let id = req.params.id;
+  let updatedData = req.body;
+  userModel
+    .updateOne({ _id: id }, { age: 25 })
+    .then(() => {
+      res.status(200).send({ message: "User updated" });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send({ message: "Error in updation" });
+    });
 };
 
 const deleteUser = (req, res) => {
