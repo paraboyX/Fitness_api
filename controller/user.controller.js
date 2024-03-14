@@ -1,22 +1,22 @@
 const userModel = require("../model/user.model");
 var bcrypt = require("bcryptjs");
 
-const createUser = async(req, res) => {
-  let newUser = req.body;
-  let pass = newUser.password;
-  var salt = bcrypt.genSaltSync(10);
-  var hashedPass = bcrypt.hashSync(pass, salt);
-  newUser.password = hashedPass;
-  try{
-     let doc = await userModel.create(newUser)
-  }
-  catch(err){
+const createUser = async (req, res) => {
+  try {
+    let newUser = req.body;
+    let pass = newUser.password;
+    var salt = bcrypt.genSaltSync(10);
+    var hashedPass = bcrypt.hashSync(pass, salt);
+    newUser.password = hashedPass;
+    let doc = await userModel.create(newUser);
+    res.status(201).send({ message: "User created" });
+  } catch (err) {
     console.log(err);
     res.status(500).send({ message: "Error in updation" });
   }
-}
+};
 
-const getUsers = async(req, res) => {
+const getUsers = async (req, res) => {
   userModel
     .find()
     .then((data) => {
@@ -27,7 +27,7 @@ const getUsers = async(req, res) => {
     });
 };
 
-const updateUser = async(req, res) => {
+const updateUser = async (req, res) => {
   let id = req.params.id;
   let updatedData = req.body;
   userModel
@@ -41,7 +41,7 @@ const updateUser = async(req, res) => {
     });
 };
 
-const deleteUser = async(req, res) => {
+const deleteUser = async (req, res) => {
   let id = req.params.id;
   userModel
     .deleteOne({ _id: id })
