@@ -9,7 +9,7 @@ const {
 
 routes.post("/", createUser);
 routes.get("/", getUsers);
-routes.put("/", updateUser);
-routes.delete("/", deleteUser);
+routes.put("/:id", updateUser);
+routes.delete("/:id", deleteUser);
 
 module.exports = routes;

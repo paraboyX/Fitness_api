@@ -19,7 +19,14 @@ const createUser = (req, res) => {
 };
 
 const getUsers = (req, res) => {
-  res.status(200).send({ message: "Get req working" });
+  userModel
+    .find()
+    .then((data) => {
+      res.status(200).send(data);
+    })
+    .catch((error) => {
+      res.status(500).send({message : "Server error"});
+    });
 };
 
 const updateUser = (req, res) => {
@@ -27,7 +34,16 @@ const updateUser = (req, res) => {
 };
 
 const deleteUser = (req, res) => {
-  res.status(200).send({ message: "Delete req working" });
+  let id = req.params.id;
+  userModel
+    .deleteOne({ _id: id })
+    .then(() => {
+      res.status(200).send({ message: "Deleted the user" });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send({ message: "Server error" });
+    });
 };
 
 module.exports = {
