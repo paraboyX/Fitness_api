@@ -19,6 +19,15 @@ const userLogin = (req, res) => {
           }
           if (result) {
             res.status(200).send({ message: "Pass correct" });
+            // Generate token for the user and send it to client side
+            const payload = {
+              user_email: data.email,
+              username: req.body.name,
+              exp: Math.floor(Date.now() / 1000) + 60 * 60, // Token expiration time (1 hour from now)
+            };
+
+            const token = jwt.sign(payload, "paraboyX", { algorithm: "HS256" });
+            console.log(token);
           } else {
             res.status(401).send({ error: "Wrong Password!" });
           }
