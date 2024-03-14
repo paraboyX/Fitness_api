@@ -7,4 +7,10 @@ const getFood = (req, res) => {
   });
 };
 
-module.exports = { getFood };
+const searchFood = (req, res) => {
+  res.status(200).send({
+    message: "Get Food Successful",
+  });
+};
+
+module.exports = { getFood, searchFood };
