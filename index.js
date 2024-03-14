@@ -11,6 +11,7 @@ const app = express();
 const PORT = process.env.PORT;
 
 app.use(express.json());
+
 connection();
 
 app.listen(8000, () => console.log(`Server is running`));
