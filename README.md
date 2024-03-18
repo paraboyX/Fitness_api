@@ -5,19 +5,16 @@ Installation
 
     Clone the repository:
 
-    bash
+    git clone https://github.com/paraboyX/Fitness_api.git
 
-git clone https://github.com/yourusername/fitness-api.git
 
 Navigate into the project directory:
 
-bash
-
 cd fitness-api
 
-Install dependencies:
 
-bash
+
+Install dependencies:
 
 npm install
 
@@ -26,17 +23,15 @@ Create a .env file in the root directory and define the following variables:
 
 makefile
 
-    PORT=3000
-    MONGODB_URI=your_mongodb_connection_string
-    JWT_SECRET=your_jwt_secret
+     PORT = 8000
+     MONGO_URL = "mongodb://localhost:27017/Nutrition"
+     SECRET_KEY = "paraboyX"
 
     Replace your_mongodb_connection_string with your MongoDB connection string and your_jwt_secret with your preferred JWT secret key.
 
 Usage
 
     Start the server:
-
-    bash
 
     npm start
 
