@@ -15,7 +15,7 @@ app.use(express.json());
 
 connection();
 
-app.listen(8000, () => console.log(`Server is running`));
+app.listen(PORT, () => console.log(`Server is running`));
 
 app.use("/register", userRoute);
 app.use("/login", loginRoute);

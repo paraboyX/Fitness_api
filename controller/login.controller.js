@@ -1,3 +1,4 @@
+require("dotenv").config({ path: "../.env" });
 const express = require("express");
 var bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -26,7 +27,7 @@ const userLogin = (req, res) => {
               exp: Math.floor(Date.now() / 1000) + 60 * 60, // Token expiration time (1 hour from now)
             };
 
-            const token = jwt.sign(payload, "paraboyX", { algorithm: "HS256" });
+            const token = jwt.sign(payload, process.env.SECRET_KEY, { algorithm: "HS256" });
             console.log(token);
           } else {
             res.status(401).send({ error: "Wrong Password!" });
